@@ -10,6 +10,7 @@ Carrito.belongsTo(Usuario);
 Usuario.hasMany(Pedido);
 Pedido.belongsTo(Usuario);
 Carrito.belongsToMany(Producto,{through:ProductoCarrito});
+Producto.belongsToMany(Carrito,{through:ProductoCarrito});
 
 //Finalmente conectamos con la base de datos
 sequelize
