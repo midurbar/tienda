@@ -3,8 +3,8 @@ const sequelize= require('./db');
 
 //definimos el modelo para usuario
 const Usuario=sequelize.define('usuario',{
-    email:Sequelize.STRING,
-    password:Sequelize.STRING,
+    email:Sequelize.STRING(50),
+    password:Sequelize.STRING(80),
     nombre:Sequelize.STRING,
     apellidos:Sequelize.STRING
 });

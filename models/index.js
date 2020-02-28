@@ -4,7 +4,6 @@ const Usuario=require('./users.js');
 const Carrito=require('./cart.js');
 const Pedido=require('./order.js');
 
-
 Usuario.hasOne(Carrito);
 Carrito.belongsTo(Usuario);
 
@@ -13,7 +12,7 @@ sequelize
   .authenticate()
   .then(() => {
     console.log('Connection has been established successfully.');
-    sequelize.sync();
+    sequelize.sync({alter:true});
   })
   .catch(err => {
     console.error('Unable to connect to the database:', err);
