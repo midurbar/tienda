@@ -1,6 +1,7 @@
 const sequelize= require('./db');
 const Producto= require('./products.js');
 const Usuario=require('./users.js');
+const Carrito=require('./cart.js');
 const Pedido=require('./order.js');
 
 //Finalmente conectamos con la base de datos
@@ -18,5 +19,5 @@ sequelize
       Producto,
       Usuario,
       Pedido,
-      // Carrito
+      Carrito
   }
