@@ -78,13 +78,6 @@ router.post("/login", function (req, res, next) {
     }
   });
 
-  if (user) {
-    req.session.username = username;
-    res.redirect("/");
-  } else {
-    //TODO: inyectar mensaje de error en plantilla
-    res.render("login");
-  }
 });
 
 router.post("/register", function (req, res, next) {
