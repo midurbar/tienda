@@ -65,9 +65,17 @@ router.get("/register", function (req, res, next) {
  * Si no coincide, vuelve a cargar la página de login para mostrar un error.
  */
 router.post("/login", function (req, res, next) {
-  const {username, password} = req.body;
-  const user = users.find(function (u) {
-    return (u.username == username && u.password == password);
+  const {email, password} = req.body;
+
+  Usuario.findOne({where: {email,password}})
+  .then(usuario => {
+    if (usuario) {
+      req.session.usuarioId = usuario.id;
+      res.redirect("/");
+    } else {
+      //TODO: inyectar mensaje de error en plantilla
+      res.render("login");
+    }
   });
 
   if (user) {
