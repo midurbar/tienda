@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var users = require('../models/users.js');
 
-const { Producto } =require('../models');
+const { Producto, Usuario } =require('../models');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -54,6 +54,10 @@ router.get("/login", function (req, res, next) {
   res.render("login");
 });
 
+router.get("/register", function (req, res, next) {
+  res.render("register");
+});
+
 /**
  * Procesamiento del formulario de login. Obtiene los datos del formulario en la
  * petición (req) y comprueba si hay algún usuario con ese nombre y contraseña.
@@ -72,6 +76,19 @@ router.post("/login", function (req, res, next) {
   } else {
     //TODO: inyectar mensaje de error en plantilla
     res.render("login");
+  }
+});
+
+router.post("/register", function (req, res, next) {
+  const datos=req.body;
+  if (datos.password == datos.repassword) {
+    Usuario.create(datos)
+      .then( usuario => {
+          res.redirect("/login");
+      });
+
+  }else {
+    res.redirect("/register");
   }
 });
 
