@@ -87,6 +87,8 @@ router.post("/register", function (req, res, next) {
     res.render("register",{datos, error:"Apellidos no puede estar vacio"});
   }else if (datos.email.length==0){
     res.render("register",{datos, error:"Email no puede estar vacio"});
+  }else if (!/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(datos.email)) {
+    res.render("register",{datos, error: "Email no valido"});
   }else if (datos.password.length<6) {
     res.render("register", {datos, error:"La contraseña debe tener al menos 6 caracteres."})
   }
