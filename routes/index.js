@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-var users = require('../models/users.js');
 
 const { Producto, Usuario } =require('../models');
 
@@ -9,7 +8,7 @@ router.get('/', function(req, res, next) {
   const username = req.session.username;
 
   Producto.findAll().then(products => {
-    res.render('index', { title: 'The Jungle', username, products });
+    res.render('index', { title: 'tu tienda online', username, products });
   })
 
 });
@@ -82,14 +81,22 @@ router.post("/login", function (req, res, next) {
 
 router.post("/register", function (req, res, next) {
   const datos=req.body;
-  if (datos.password == datos.repassword) {
-    Usuario.create(datos)
-      .then( usuario => {
-          res.redirect("/login");
-      });
-
+  if (datos.nombre.length==0){
+    res.render("register",{datos, error:"Nombre no puede estar vacio"});
+  }else if (datos.apellidos.length==0){
+    res.render("register",{datos, error:"Apellidos no puede estar vacio"});
+  }else if (datos.email.length==0){
+    res.render("register",{datos, error:"Email no puede estar vacio"});
+  }else if (datos.password.length<6) {
+    res.render("register", {datos, error:"La contraseña debe tener al menos 6 caracteres."})
+  }
+  else if (datos.password != datos.repassword) {
+    res.render("register", {datos, error:"Las contraseñas no coinciden."})
   }else {
-    res.redirect("/register");
+    Usuario.create(datos)
+    .then(usuario => {
+      res.redirect("/login");
+    })
   }
 });
 
