@@ -57,10 +57,6 @@ router.post("/comprar", function (req, res, next) {
       }
     });
 
-  // Añadimos producto a la cesta
-  cesta.push(product);
-  // Redirigimos a página de productos
-  res.redirect("/");
 });
 
 router.get("/login", function (req, res, next) {
