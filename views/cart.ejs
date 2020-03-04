@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+
+    <h2>Carrito de compra</h2>
+
+    <div class="container">
+     <div class="row">
+        <div class="col-xs-12">
+        <table class="table table-bordered table-hover">
+            <thead>
+            <tr>
+                <th>Ref.</th>
+                <th>Nombre</th>
+                <th>Unidades</th>
+                <th>Precio Unidad</th>
+                <th>Subtotal</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>1001</td>
+                <td>TV</td>
+                <td>2</td>
+                <td>160</td>
+                <td>320</td>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="5" class="text-right">Total: 320</td>
+                </tr>
+                <tr>
+                    <td colspan="3" class="text-center">
+                        <a href="/" class="btn btn-primary">Seguir Comprando</a>
+                    </td>
+                    <td colspan="2" class="text-center">
+                        <form method="POST" action="/checkout">
+                            <input type="submit" class="btn btn-primary" value="Finalizar Compra">
+                        </form>
+                    </td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    </div>
+    </div>
+
+  
+</body>
+</html>
