@@ -77,6 +77,9 @@ router.get("/register", function (req, res, next) {
 });
 
 router.get("/cart",function (req, res, next) {
+  const usuarioId=req.session.usuarioId;
+  if(!usuarioId) res.redirect("/login");
+  
   res.render("cart");
 });
 
