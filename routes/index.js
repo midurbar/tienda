@@ -44,12 +44,18 @@ router.post("/comprar", function (req, res, next) {
         //Localizamos producto y lo ponemos en el carrito
         const usuarioId=req.session.usuarioId;
         if (!usuarioId) res.redirect("/login");
-        Carrito.findOrCreate({where: {usuarioId}, defaults: {usuarioId}})
+        Carrito.findOrCreate({where: {usuarioId}, include: [Producto], defaults: {usuarioId}})
         .then(([carrito, created]) => {
-          carrito.addProducto(product)
-          .then(() => {
-            res.redirect("/");
-          })
+          var productos=carrito.productos;
+          var p=productos.find(p => p.ref== ref);
+          if (p) {
+
+          }else {
+            carrito.addProducto(product)
+            .then(() => {
+              res.redirect("/");
+            })
+          }
         });
       }else {
         //Mostrar pagina de error
