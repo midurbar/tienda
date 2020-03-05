@@ -23,13 +23,15 @@
             </tr>
             </thead>
             <tbody>
+            <% for (var i=0; i<productos.length; i++) { %>
             <tr>
-                <td>1001</td>
-                <td>TV</td>
-                <td>2</td>
-                <td>160</td>
-                <td>320</td>
+                <td><%= productos[i].ref %></td>
+                <td><%= productos[i].nombre %></td>
+                <td><%= productos[i].productocarrito.cantidad %></td>
+                <td><%= productos[i].precio %></td>
+                <td><%= productos[i].precio*productos[i].productocarrito.cantidad %></td>
             </tbody>
+            <% } %>
             <tfoot>
                 <tr>
                     <td colspan="5" class="text-right">Total: 320</td>

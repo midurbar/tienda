@@ -78,9 +78,15 @@ router.get("/register", function (req, res, next) {
 
 router.get("/cart",function (req, res, next) {
   const usuarioId=req.session.usuarioId;
-  if(!usuarioId) res.redirect("/login");
-  
-  res.render("cart");
+  if (!usuarioId) {
+     res.redirect("/login");
+  } else {
+    Carrito.findOne({where: {usuarioId}, include:[Producto]})
+   .then (carrito => {
+      var productos=carrito.productos;
+      res.render("cart", {productos});
+   });
+  }
 });
 
 /**
