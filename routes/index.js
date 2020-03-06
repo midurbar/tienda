@@ -51,12 +51,12 @@ router.post("/comprar", function (req, res, next) {
           if (p) {
             p.productocarrito.increment({cantidad: 1})
             .then(() => {
-              res.redirect("/");
+              res.redirect("/carrito");
             });
           }else {
             carrito.addProducto(product)
             .then(() => {
-              res.redirect("/");
+              res.redirect("/carrito");
             })
           }
         });
