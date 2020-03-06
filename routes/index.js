@@ -83,8 +83,9 @@ router.get("/cart",function (req, res, next) {
   } else {
     Carrito.findOne({where: {usuarioId}, include:[Producto]})
    .then (carrito => {
-      var productos=carrito.productos;
-      res.render("cart", {productos});
+      const productos=carrito.productos;
+      const total = productos.reduce((total,p) => total + p.precio*p.productocarrito.cantidad);
+      res.render("cart", {productos, total});
    });
   }
 });
