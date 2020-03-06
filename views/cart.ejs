@@ -23,15 +23,25 @@
             </tr>
             </thead>
             <tbody>
-            <% for (var i=0; i<productos.length; i++) { %>
-            <tr>
-                <td><%= productos[i].ref %></td>
-                <td><%= productos[i].nombre %></td>
-                <td><%= productos[i].productocarrito.cantidad %></td>
-                <td><%= productos[i].precio %></td>
-                <td><%= productos[i].precio*productos[i].productocarrito.cantidad %></td>
+             <% for (var i=0; i<productos.length; i++) { %>
+                <% if (productos[i].hayExistencias==false) {%>
+                    <tr>
+                        <td><%= productos[i].ref %></td>
+                        <td><%= productos[i].nombre %></td>
+                        <td><%= productos[i].productocarrito.cantidad %></td>
+                        <td colspan="3"><%= productos[i].precio %>No hay suficientes existencias</td>
+                    </tr>
+                <% } else { %>
+                    <tr>
+                        <td><%= productos[i].ref %></td>
+                        <td><%= productos[i].nombre %></td>
+                        <td><%= productos[i].productocarrito.cantidad %></td>
+                        <td><%= productos[i].precio %></td>
+                        <td><%= productos[i].precio*productos[i].productocarrito.cantidad %></td>
+                    </tr>
+                <% } %>
+             <% } %>
             </tbody>
-            <% } %>
             <tfoot>
                 <tr>
                     <td colspan="5" class="text-right">Total: <%= total %></td>

@@ -51,12 +51,12 @@ router.post("/comprar", function (req, res, next) {
           if (p) {
             p.productocarrito.increment({cantidad: 1})
             .then(() => {
-              res.redirect("/carrito");
+              res.redirect("/cart");
             });
           }else {
             carrito.addProducto(product)
             .then(() => {
-              res.redirect("/carrito");
+              res.redirect("/cart");
             })
           }
         });
@@ -87,6 +87,28 @@ router.get("/cart",function (req, res, next) {
       const total = productos.reduce((total, p) => total + p.precio * p.productocarrito.cantidad, 0);
       res.render("cart", {productos, total});
    });
+  }
+});
+
+router.post("/checkout", function (req, res, next) {
+  const usuarioId=req.session.usuarioId;
+  if (!usuarioId) {
+    res.redirect("/login");
+  }else {
+    Carrito.findOne({where: {usuarioId}, include: [Producto]})
+    .then(carrito => {
+      const productos= carrito.productos;
+      if (productos.every(p => p.existencias >= p.productocarrito.cantidad)) {
+      
+
+      } else {
+        for (var i=0; i<productos.length; i++) {
+          productos[i].hayExistencias= productos[i].existencias >= productos[i].productocarrito.cantidad;
+        }
+        const total = productos.reduce((total, p) => total + p.precio * p.productocarrito.cantidad, 0);
+        res.render("cart", {productos, total});
+      }
+    });
   }
 });
 
